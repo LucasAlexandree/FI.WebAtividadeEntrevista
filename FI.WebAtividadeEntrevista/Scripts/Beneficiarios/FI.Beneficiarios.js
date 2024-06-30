@@ -73,14 +73,14 @@ $(document).ready(function () {
 })
 
 function validarCPF(cpf) {
-    cpf = cpf.replace(/[^\d]/g, ''); // Remove caracteres não numéricos
+    cpf = cpf.replace(/[^\d]/g, ''); 
 
-    // Verifica se o CPF tem 11 dígitos numéricos
+    
     if (cpf.length !== 11) {
         return false;
     }
 
-    // Verifica se todos os dígitos são iguais, o que invalida o CPF
+    
     var repetido = true;
     for (var i = 1; i < 11; i++) {
         if (cpf[i] !== cpf[0]) {
@@ -92,7 +92,7 @@ function validarCPF(cpf) {
         return false;
     }
 
-    // Calcula o primeiro dígito verificador
+    
     var soma = 0;
     for (var i = 0; i < 9; i++) {
         soma += parseInt(cpf.charAt(i)) * (10 - i);
@@ -100,12 +100,12 @@ function validarCPF(cpf) {
     var resto = 11 - (soma % 11);
     var digitoVerificador1 = resto === 10 || resto === 11 ? 0 : resto;
 
-    // Verifica o primeiro dígito verificador
+    
     if (digitoVerificador1 !== parseInt(cpf.charAt(9))) {
         return false;
     }
 
-    // Calcula o segundo dígito verificador
+    
     soma = 0;
     for (var i = 0; i < 10; i++) {
         soma += parseInt(cpf.charAt(i)) * (11 - i);
@@ -113,12 +113,12 @@ function validarCPF(cpf) {
     resto = 11 - (soma % 11);
     var digitoVerificador2 = resto === 10 || resto === 11 ? 0 : resto;
 
-    // Verifica o segundo dígito verificador
+    
     if (digitoVerificador2 !== parseInt(cpf.charAt(10))) {
         return false;
     }
 
-    // CPF válido
+    
     return true;
 }
 

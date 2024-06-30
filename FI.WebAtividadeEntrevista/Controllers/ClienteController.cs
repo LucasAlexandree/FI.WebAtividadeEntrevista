@@ -39,13 +39,13 @@ namespace WebAtividadeEntrevista.Controllers
             }
             else
             {
-                if (!boValidarCPF.ValidaCPF(model.CPF)) //Verifica o cpf conforme calculo dos numeros
+                if (!boValidarCPF.ValidaCPF(model.CPF)) 
                 {
                     Response.StatusCode = 400;
                     return Json(string.Join(Environment.NewLine, "Este não é um CPF valido!"));
                 }
 
-                if (bo.VerificarExistencia(model.CPF)) //cpf já cadastrado no banco de dados
+                if (bo.VerificarExistencia(model.CPF)) 
                 {
                     Response.StatusCode = 400;
                     return Json(string.Join(Environment.NewLine, "Este CPF ja esta em uso!"));
@@ -69,7 +69,7 @@ namespace WebAtividadeEntrevista.Controllers
                 {
                     List<BeneficiarioModel> beneficiarios = JsonConvert.DeserializeObject<List<BeneficiarioModel>>(model.Beneficiarios);
 
-                    var result = ManipularBeneficiarios(beneficiarios, model.Id); //Aqui ele leva ao metodo do beneficiario, onde verifica se ocorreu alteração 
+                    var result = ManipularBeneficiarios(beneficiarios, model.Id);  
 
                     if (!string.IsNullOrEmpty(result))
                     {
@@ -264,7 +264,7 @@ namespace WebAtividadeEntrevista.Controllers
 
                 List<Cliente> clientes = new BoCliente().Pesquisa(jtStartIndex, jtPageSize, campo, crescente.Equals("ASC", StringComparison.InvariantCultureIgnoreCase), out qtd);
 
-                //Return result to jTable
+                
                 return Json(new { Result = "OK", Records = clientes, TotalRecordCount = qtd });
             }
             catch (Exception ex)
@@ -285,7 +285,7 @@ namespace WebAtividadeEntrevista.Controllers
             List<Beneficiario> listBeneficiarios = new BoBeneficiario().Pesquisar(clienteId);
 
             beneficiarios.ForEach(item => beneficiariosModelIds.Add(item.Id));
-            beneficiarioAlterado = beneficiarios.Where(w => w.Alterado).ToList(); //alteração
+            beneficiarioAlterado = beneficiarios.Where(w => w.Alterado).ToList(); 
 
             if (listBeneficiarios.Count > 0)
             {
@@ -313,7 +313,7 @@ namespace WebAtividadeEntrevista.Controllers
 
             foreach (var beneficiario in beneficiarios)
             {
-                if (!beneficiariosIds.Contains(beneficiario.Id)) //alem da verificação por cpf, verifica também por id
+                if (!beneficiariosIds.Contains(beneficiario.Id)) 
                 {
                     if (!boValidarCPF.ValidaCPF(beneficiario.CPF))
                     {
